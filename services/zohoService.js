@@ -227,9 +227,10 @@ class ZohoService {
 
     // Project Details
     addFieldIfValidAndNotFile(proposalData.projectSummary, 'Project_Summary');
-    // addFieldIfValidAndNotFile(proposalData.projectEnvironment, 'Project_Environment');
-    addFieldIfValidAndNotFile(proposalData.detailedLocationDescription, 'Detailed_Location_Description');
-    // addFieldIfValidAndNotFile(proposalData.primaryLocation, 'Primary_Location');
+    addFieldIfValidAndNotFile(proposalData.projectEnvironment, 'Project_Environment');
+    addFieldIfValidAndNotFile(proposalData.primaryLocation, 'Project_Location');
+    addFieldIfValidAndNotFile(proposalData.latitude, 'Latitude');
+    addFieldIfValidAndNotFile(proposalData.longitude, 'Longitude');
     // addFieldIfValidAndNotFile(proposalData.primaryThematicArea, 'Primary_Belize_Fund_Thematic_Area'); // Do not map this field for now
     // addFieldIfValidAndNotFile(proposalData.secondaryThematicArea, 'Secondary_Thematic_Area_if_applicable');
     addFieldIfValidAndNotFile(proposalData.logicalFrameworkGoal, 'Goal'); // Mapping logicalFrameworkGoal to 'Goal' in Zoho
