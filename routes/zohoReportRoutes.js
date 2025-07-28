@@ -46,7 +46,7 @@ router.get('/gap-concept-papers', async (req, res) => {
         params: {
           max_records: 200,
           field_config: 'custom',
-          fields: 'Project_Title,Organization,Organization_Name,Contact_Name,Email,Project_Summary,Goal,Thematic_Area,Primary_Belize_Fund_Thematic_Area,Secondary_Thematic_Area_if_applicable,Proposed_Start_Date,Expected_End_Date,Duration_Months,Total2,Total_Co_Financing,Total_Project_Estimated_Cost,Organization_Address,Type_of_Organization,Detailed_Location_Description,Latitude,Longitude,Date_of_incorporation_of_Organization,Position,Telephone'
+          fields: 'Project_Title,Organization,Organization_Name,Contact_Name,Email,Project_Summary,Goal,Thematic_Area,Primary_Belize_Fund_Thematic_Area,Secondary_Thematic_Area_if_applicable,Proposed_Start_Date,Expected_End_Date,Duration_Months,Total2,Total_Co_Financing,Total_Project_Estimated_Cost,Organization_Address,Type_of_Organization,Detailed_Location_Description,Latitude,Longitude,Date_of_incorporation_of_Organization,Position,Telephone,Project_Theme,Award_Category1'
         }
       });
     
