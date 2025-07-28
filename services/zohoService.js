@@ -206,12 +206,12 @@ class ZohoService {
     addFieldIfValidAndNotFile(proposalData.organizationName, 'Organization');
     addFieldIfValidAndNotFile(proposalData.organizationName, 'Recipient_Organization');
     addFieldIfValidAndNotFile(proposalData.organizationAddress, 'Organization_Address');
-    // addFieldIfValidAndNotFile(proposalData.legalStatus, 'Legal_Status');
-    // addFieldIfValidAndNotFile(proposalData.organizationType, 'Type_of_Organization');
+    addFieldIfValidAndNotFile(proposalData.legalStatus, 'Legal_Status');
+    addFieldIfValidAndNotFile(proposalData.organizationType, 'Type_of_Organization');
     addFieldIfValidAndNotFile(proposalData.organizationVision, 'Organization_Vision');
     addFieldIfValidAndNotFile(proposalData.organizationMission, 'Organization_Mission');
     addFieldIfValidAndNotFile(proposalData.organizationalBackground, 'Organizational_Background_and_Capacity');
-    addFieldIfValidAndNotFile(proposalData.previousRelevantProjects, 'Relevant_Previous_Projects');
+    addFieldIfValidAndNotFile(proposalData.previousRelevantProjects, 'Previous_Relevant_Projects');
     addFieldIfValidAndNotFile(proposalData.partnerOrganizations, 'Partner_Organizations_if_applicable');
 
     // Contact Information
@@ -228,11 +228,11 @@ class ZohoService {
     // Project Details
     addFieldIfValidAndNotFile(proposalData.projectSummary, 'Project_Summary');
     addFieldIfValidAndNotFile(proposalData.projectEnvironment, 'Project_Environment');
-    addFieldIfValidAndNotFile(proposalData.primaryLocation, 'Project_Location');
+    addFieldIfValidAndNotFile(proposalData.primaryLocation, 'Primary_Project_Location');
     addFieldIfValidAndNotFile(proposalData.latitude, 'Latitude');
     addFieldIfValidAndNotFile(proposalData.longitude, 'Longitude');
-    // addFieldIfValidAndNotFile(proposalData.primaryThematicArea, 'Primary_Belize_Fund_Thematic_Area'); // Do not map this field for now
-    // addFieldIfValidAndNotFile(proposalData.secondaryThematicArea, 'Secondary_Thematic_Area_if_applicable');
+    addFieldIfValidAndNotFile(proposalData.primaryThematicArea, 'Primary_Belize_Fund_Thematic_Area');
+    addFieldIfValidAndNotFile(proposalData.secondaryThematicArea, 'Secondary_Thematic_Area_if_applicable');
     addFieldIfValidAndNotFile(proposalData.logicalFrameworkGoal, 'Goal'); // Mapping logicalFrameworkGoal to 'Goal' in Zoho
     addFieldIfValidAndNotFile(proposalData.stakeholderEngagementPlan, 'Stakeholder_Engagement_Plan_SEP');
     addFieldIfValidAndNotFile(proposalData.sustainabilityPlan, 'SUSTAINABILITY_REPLICATION1');
@@ -256,6 +256,7 @@ class ZohoService {
     if (proposalData.objective3) projectObjectivesText += (projectObjectivesText ? '\n' : '') + proposalData.objective3;
     if (projectObjectivesText) mappedData.Project_Objective_s = projectObjectivesText;
     addFieldIfValidAndNotFile(proposalData.projectGoalObjectives, 'Project_Goal'); // From previous mapping
+    addFieldIfValidAndNotFile(proposalData.thematicArea, 'Thematic_Area');
 
 
     // --- Subform Mappings ---
@@ -559,13 +560,13 @@ class ZohoService {
 
     // Background Information Mapping - using exact Zoho field names
     addFieldIfValid(conceptData.projectTitle, 'Project_Title');
-    addFieldIfValid(conceptData.organizationName, 'Organization_Name');
+    addFieldIfValid(conceptData.organizationName, 'Organization');
     addFieldIfValid(conceptData.organizationAddress, 'Organization_Address');
     addFieldIfValid(conceptData.organizationType, 'Type_of_Organization');
     
     if (conceptData.dateOfIncorporation) {
       const formattedIncorporationDate = formatDateForZoho(conceptData.dateOfIncorporation);
-      if (formattedIncorporationDate) mappedData.Date_of_Incorporation_of_Organization = formattedIncorporationDate;
+      if (formattedIncorporationDate) mappedData.Date_of_incorporation_of_Organization = formattedIncorporationDate;
     }
 
     // Main Contact Information - using exact Zoho field names
@@ -579,15 +580,19 @@ class ZohoService {
       const formattedStartDate = formatDateForZoho(conceptData.proposedStartDate);
       if (formattedStartDate) mappedData.Proposed_Start_Date = formattedStartDate;
     }
+    if (conceptData.expectedEndDate) {
+      const formattedEndDate = formatDateForZoho(conceptData.expectedEndDate);
+      if (formattedEndDate) mappedData.Expected_End_Date = formattedEndDate;
+    }
     addFieldIfValid(conceptData.durationMonths, 'Duration_Months');
 
     // Award Category and Thematic Area - now single line text fields
     addFieldIfValid(conceptData.awardCategory, 'Award_Category1');
-    addFieldIfValid(conceptData.thematicArea, 'Project_Theme');
+    addFieldIfValid(conceptData.thematicArea, 'Thematic_Area');
 
     // Content Sections - using exact Zoho field names
     addFieldIfValid(conceptData.projectSummary, 'Project_Summary');
-    addFieldIfValid(conceptData.projectGoalObjectives, 'Project_Goal_and_Objectives');
+    addFieldIfValid(conceptData.projectGoalObjectives, 'Goal');
     addFieldIfValid(conceptData.projectOutputsActivities, 'Project_Outputs_and_Activities');
 
     // Budget Information - Calculate totals
@@ -647,9 +652,25 @@ class ZohoService {
       if (formattedDeclarationDate) mappedData.Declaration_Date = formattedDeclarationDate;
     }
 
+    // Additional fields from JSON data
+    addFieldIfValid(conceptData.detailedLocationDescription, 'Detailed_Location_Description');
+    addFieldIfValid(conceptData.projectImplementationTeam, 'Project_Implementation_Team');
+    addFieldIfValid(conceptData.keyProjectImplementationPersonnel, 'Key_Project_implementation_personnel_CVs_project_manager_Financial_Administrator_etc');
+    addFieldIfValid(conceptData.genderActionPlan, 'Gender_Action_Plan_GAP');
+    addFieldIfValid(conceptData.lettersOfSupport, 'Letters_of_support_from_relevant_stakeholders_Partners');
+    addFieldIfValid(conceptData.feasibilityStudy, 'Feasibility_Study_if_applicable');
+    addFieldIfValid(conceptData.planDesign, 'Plan_Design_if_applicable');
+    addFieldIfValid(conceptData.environmentalClearanceLetter, 'Environmental_Clearance_letter_if_applicable');
+    addFieldIfValid(conceptData.maps, 'Maps_if_applicable');
+    addFieldIfValid(conceptData.commitmentLetters, 'Commitment_letters_from_contributing_organization_s');
+    addFieldIfValid(conceptData.anySupportingDocumentation, 'Any_supporting_documentation_pending_submission_to_the_Belize_Fund');
+    addFieldIfValid(conceptData.environmentalSocialRiskScreeningTool, 'Environmental_and_Social_Risk_Screening_Tool_ESRST_Results');
+    addFieldIfValid(conceptData.environmentalSocialRiskManagementPlan, 'Environmental_and_Social_Risk_Management_Plan_ESRMP');
+    addFieldIfValid(conceptData.minVideo, 'Min_Video');
+
     console.log('Mapped concept data for Zoho (updated with exact field names):', mappedData);
     console.log('Critical field values:', {
-      Project_Theme: mappedData.Project_Theme,
+      Thematic_Area: mappedData.Thematic_Area,
       Award_Category1: mappedData.Award_Category1,
       Type_of_Organization: mappedData.Type_of_Organization,
       Project_Budget_Summary_Count: mappedData.Project_Budget_Summary?.length || 0

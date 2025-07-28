@@ -2,14 +2,14 @@
   "name": "grant-application-backend",
   "version": "1.0.0",
   "description": "Backend server for grant application form",
-  "main": "backend/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "nodemon backend/index.js",
+    "dev:backend": "nodemon index.js",
     "dev:frontend": "npm run dev --prefix frontend",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "node backend/index.js",
+    "start": "node index.js",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {

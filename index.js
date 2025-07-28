@@ -9,6 +9,7 @@ dotenv.config({ path: path.join(__dirname, 'config.env') }); // Load from config
 
 
 const applicationRoutes = require('./routes/applicationRoutes');
+const zohoReportRoutes = require('./routes/zohoReportRoutes');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Routes
 app.use('/api/applications', applicationRoutes);
+app.use('/api/zoho/reports', zohoReportRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
