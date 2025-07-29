@@ -32,8 +32,6 @@ async function testZohoReportFetch() {
     
     const reportUrl = `https://www.zohoapis.com/creator/v2.1/data/${orgId}/${appId}/report/${reportName}`;
     
-    console.log('🌐 Report URL:', reportUrl);
-    console.log('📊 Fetching report data...');
     
     // Make the API call to fetch report data
     const response = await axios.get(reportUrl, {

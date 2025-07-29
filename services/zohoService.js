@@ -159,7 +159,6 @@ class ZohoService {
   mapToZohoFields(proposalData) {
     const mappedData = {};
 
-    // Helper function to format dates for Zoho Creator (DD-MMM-YYYY format)
     const formatDateForZoho = (dateString) => {
       if (!dateString) return null;
       try {
